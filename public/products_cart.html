@@ -1,0 +1,163 @@
+<html>
+<head>
+  <title>Javascript eCommerce Boilerplate</title>
+  <script type="text/javascript" src="https://cdn.chec.io/v1/commerce.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/2.7.2/jquery.serializejson.js"></script>
+  <script>
+    //USE YOUR API KEY HERE
+    Chec = new Commerce('pk_test_123038fb76224b56002794cb19cf9ca207dd0605bf9da', true);
+  </script>
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+    body { text-align: center; font-family:Open Sans; font-weight:400; font-size: 14px; }
+    #checkout { display: inline-block; margin:0 auto; text-align: left; }
+    b { font-weight:600; }
+    .block {
+    margin: 25px auto;
+    }
+    .row { margin: 5px auto; text-align: left; }
+    input, select { margin: 5px 0px; }
+
+    button { font-size: 16px; padding: 15px 25px;}
+
+    #products { background: #eee; padding: 25px; text-align: center;}
+    #products .product { width: 50%; border: 1px solid black; border-radius: 5px; margin: 25px auto; padding: 25px;}
+    h1 { color: red; }
+    #cart {
+
+    }
+
+    #cart table, #cart table td, #cart table tr { border: none; }
+    #cart table tfoot tr { background: #222; color: white; }
+    #cart table tbody tr:nth-child(odd) { background: #eee; }
+    #cart table tbody tr:nth-child(even) { background: #fff; }
+    #cart table tr  td + td, #cart table tr  td + td + td   { text-align: right; }
+    #container { width: 800px; margin: 0 auto;}
+
+  </style>
+</head>
+<body>
+
+  <div id="container">
+  <div id="products">
+    <h1>Products</h1>
+  </div>
+
+  <div id="cart">
+    <h1>Cart</h1>
+    <table style="width: 100%;">
+      <thead>
+      <tr>
+      <td style="width: 50%;"><b>Item</b></td>
+      <td style="width: 25%;"><b>Quantity</b></td>
+      <td style="width: 25%;"><b>Price</b></td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td style="width: 50%;"></td>
+      <td style="width: 25%;"></td>
+      <td style="width: 25%;"></td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+      <td style="width: 30%;"></td>
+      <td style="width: 25%;">Subtotal</td>
+      <td style="width: 25%;" class="cart-subtotal">$0.00</td>
+      </tr>
+      </tfoot>
+    </table>
+    <hr>
+      <button onclick="alert('go to checkout');">Go To Checkout</button>
+    <hr>
+  </div>
+
+
+</div>
+
+  <script defer>
+
+  $(document).ready(function(){
+
+    //Refresh the cart session
+    Chec.Cart.refresh();
+
+    //Load Products
+    Chec.Products.list(function(resp){
+
+      //For each product
+      $.each(resp.data, function(index, product){
+
+        //Create Product Card
+        var html = ' \
+        <div class="product"> \
+          <h2>'+product.name+'</h2> \
+          <button onclick="addToCart(\''+product.id+'\');">'+product.price.formatted_with_symbol+' - Add to cart</button> \
+        </div>';
+
+        //Append product card to #products div
+        $('#products').append(html);
+
+      });
+     },
+    function(error){
+      alert('error loading products');
+     }
+    );
+
+  });
+
+
+  //Add product to cart
+  function addToCart(product_id) {
+
+    //See: https://commercejs.com/docs/api/?javascript#add-item-to-cart
+    Chec.Cart.add({'id': product_id}, function(resp) {
+
+      //If product added
+      if(resp.success){
+
+        //Check if line item already exists in cart table
+        if($('[data-line-item-id="'+resp.line_item_id+'"]').length > 0){
+
+          //Remove row
+          $('[data-line-item-id="'+resp.line_item_id+'"]').remove();
+
+          //Create new cart row with updated quantity
+          var cart_row = "<tr data-line-item-id="+resp.line_item_id+"><td>"+resp.product_name+"</td><td>"+resp.quantity+"</td><td>"+resp.line_total.formatted_with_symbol+"</td></tr>";
+
+
+        } else {
+
+          //Create cart row
+          var cart_row = "<tr data-line-item-id="+resp.line_item_id+"><td>"+resp.product_name+"</td><td>"+resp.quantity+"</td><td>"+resp.line_total.formatted_with_symbol+"</td></tr>";
+
+
+        }
+
+        //Row to cart table
+        $('#cart table tbody').append(cart_row);
+
+        //Update Subtotal
+        $('#cart .cart-subtotal').html(resp.cart.subtotal.formatted_with_symbol);
+
+        //Alert product added
+        alert(resp.product_name + ' Added!');
+
+
+      }else{
+
+        alert('Error adding item!')
+
+      }
+
+    });
+
+  }
+
+  </script>
+
+</body>
+</html>

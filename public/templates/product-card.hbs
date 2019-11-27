@@ -1,0 +1,46 @@
+<div class="col-md-4 product" data-product-id="{{ id }}">
+
+          <div class="thumbnail">
+            <div class="image-wrap">
+              <img src="{{media.source}}" alt="" onerror="this.src='http://placehold.it/350x175';">
+            </div>
+            <div class="caption">
+              <h4 class="pull-right">{{ price.formatted_with_symbol }}</h4>
+              <h4><a href="#">{{ name }} {{# if is.sold_out }} (Sold Out){{/if }}</a></h4>
+              <hr>
+              <div class="form-group">
+                <label for="quantity-{{id}}">Quantity:</label>
+                <input type="text" value="1" name="product[{{id}}][quantity]" class="form-control" id="quantity-{{id}}">
+              </div>
+              {{# if variants}}
+              {{#each variants}}
+              <div class="form-group">
+          <label for="variant-{{id}}">{{ name }}:</label>
+          <select class="form-control" id="variant-{{id}}" name="product[{{../id}}][variant][{{id}}]">
+            {{#each options}}
+            <option value="{{id}}">{{name}} - {{ price.formatted_with_symbol}}</option>
+            {{/each}}
+          </select>
+        </div>
+
+
+              {{/each}}
+              {{/ if }}
+              <a href="javascript:Store.addToCart({'id' : '{{id}}',
+                                                   {{# if variants}}
+                                                   'variant' : {
+                                                   {{#each variants}}
+                                                    '{{id}}' : $('select[name=\'product[{{../id}}][variant][{{id}}]\']').val(),
+                                                   {{/each}}
+                                                  },
+                                                   {{/ if }}
+
+                                                   'quantity' : $('input[name=\'product[{{id}}][quantity]\']').val()
+
+                                                   });"
+                class="btn btn-primary ">Add to cart</a>
+
+            </div>
+
+          </div>
+        </div>

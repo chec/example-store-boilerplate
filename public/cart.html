@@ -1,0 +1,31 @@
+<html>
+<head>
+  <title>Javascript eCommerce Boilerplate</title>
+  <script type="text/javascript" src="https://cdn.chec.io/v1/commerce.js"></script>
+  <script>
+    Chec = new Commerce('pk_test_123038fb76224b56002794cb19cf9ca207dd0605bf9da', true);
+  </script>
+  <script type="text/javascript" src="./assets/js/vendor.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="./assets/js/store.js"></script>
+  <link href="./assets/css/store.css" rel="stylesheet" type="text/css">
+</head>
+<body id="cart">
+
+  <div class="container">
+
+  </div>
+
+  <script>
+  window.addEventListener("Commercejs.Cart.Ready", function(e){
+
+          //console.log('Yep');
+          Store.loadCart();
+
+        }, false);
+
+  </script>
+
+</body>
+</html>

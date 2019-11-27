@@ -1,0 +1,5 @@
+$cdn: 'https://dfsitd0y39pw1.cloudfront.net/_ui/';
+
+@function cdn($file) {
+    @return $cdn + $file;
+}
