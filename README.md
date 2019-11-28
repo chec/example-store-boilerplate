@@ -44,7 +44,7 @@ framework. For more information, see [the Commerce.js documentation](https://com
 ## Issues
 
 If you find any problems with this example store, please feel free to raise an issue on
-[our GitHub repository}(https://github.com/chec/example-store-boilerplate/issues). Pull requests are also welcomed!
+[our GitHub repository](https://github.com/chec/example-store-boilerplate/issues). Pull requests are also welcomed!
 
 ## License
 
