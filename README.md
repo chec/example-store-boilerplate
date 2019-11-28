@@ -33,7 +33,7 @@ These calls are often wrapped in jQuery AJAX requests, and the results are passe
 Here are the libraries and tools we use in this example:
 
 * CSS: Bootstrap, with some custom SCSS
-* JavaScript: vanilla/ES6, compiled with Laravel Mix
+* JavaScript: a mix of vanilla/ES6 and jQuery, compiled with Laravel Mix
 * Markup: Standard HTML, with dynamic templates using Handlebars
 * Build: Node.js with Yarn (or NPM) 
 
