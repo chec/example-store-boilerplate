@@ -21,6 +21,26 @@ To run the store (from your command line):
 
 This will start a local server running on http://localhost:8080, which you can use to test it out.
 
+## How it works
+
+This store has a couple of basic HTML pages (see `public/index.html` for example) which load up some JavaScript and
+CSS. From here we use a series of JavaScript functions (see `src/js/store.js`) to communicate with the
+[Commerce.js SDK](https://github.com/chec/commerce.js) and render products and cart information on the page.
+
+These calls are often wrapped in jQuery AJAX requests, and the results are passed through
+[Handlebars](https://handlebarsjs.com/) templates in order to keep the dynamic requests templated for the examples.
+
+Here are the libraries and tools we use in this example:
+
+* CSS: Bootstrap, with some custom SCSS
+* JavaScript: vanilla/ES6, compiled with Laravel Mix
+* Markup: Standard HTML, with dynamic templates using Handlebars
+* Build: Node.js with Yarn (or NPM) 
+
+Everything you see in this repository as an example of how you could use Commerce.js in your own project. You are
+of course free to modify the code in this repository as you please. Commerce.js can be implemented into any frontend
+framework. For more information, see [the Commerce.js documentation](https://commercejs.com/docs).
+
 ## Issues
 
 If you find any problems with this example store, please feel free to raise an issue on
