@@ -1,6 +1,6 @@
 # Commerce.js boilerplate
 
-This repository contains a bare-bones example store to see how Commerce.js works. The templates use Bootstrap for
+This repository contains a bare-bones example store to see how Commerce.js works. The templates uses Bootstrap for
 some basic styling.
 
 ## Requirements
