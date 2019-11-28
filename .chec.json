@@ -1,0 +1,8 @@
+{
+  "npm": "yarn",
+  "buildScripts": ["hot"],
+  "dovenv": {
+    "MIX_CHEC_API_URL": "%chec_api_url%",
+    "MIX_CHEC_API_KEY": "%chec_pkey%"
+  }
+}

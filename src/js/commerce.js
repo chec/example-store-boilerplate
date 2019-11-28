@@ -1,5 +1,11 @@
 import Commerce from '@chec.io/commerce';
 
 export default () => {
-  window.commerce = new Commerce('pk_test_123038fb76224b56002794cb19cf9ca207dd0605bf9da', true);
+  window.commerce = new Commerce(
+    process.env.MIX_CHEC_API_KEY,
+    true,
+    {
+      url: process.env.MIX_CHEC_API_URL || 'https://api.chec.io'
+    }
+  );
 };
