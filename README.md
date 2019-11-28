@@ -17,6 +17,7 @@ To run the store (from your command line):
 * Clone this project, e.g. `git clone https://github.com/chec/example-store-boilerplate.git`
 * Navigate into the folder, e.g. `cd example-store-boilerplate`
 * Install the dependencies, e.g. `yarn` or `npm install`
+* Create a `.env` file (you can use `.env.example` as a template) and insert your Chec public key as `MIX_CHEC_API_KEY`
 * Start the dev server, e.g. `yarn hot` or `npm run hot`
 
 This will start a local server running on http://localhost:8080, which you can use to test it out.
