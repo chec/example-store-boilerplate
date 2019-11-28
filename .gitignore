@@ -1,3 +1,5 @@
 node_modules
 yarn-error.log
 public/hot
+public/assets/css/bundle.css
+public/assets/js/bundle.js
