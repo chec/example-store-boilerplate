@@ -1,21 +1,19 @@
 * {
-    -webkit-font-smoothing: antialiased;
-            font-smoothing: always;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
-    box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: always;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Open Sans';
-    padding: 50px;
-    vertical-align: middle;
-    text-align: center;
-
-
-
+  font-family: 'Open Sans', sans-serif;
+  padding: 50px;
+  vertical-align: middle;
+  text-align: center;
 }
 
 
-hr.product-break{
-  width:100%; display: block;
+hr.product-break {
+  width:100%;
+  display: block;
 }

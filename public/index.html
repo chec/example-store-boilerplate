@@ -1,44 +1,26 @@
 <html>
 <head>
-  <title>Javascript eCommerce Boilerplate</title>
-  <script type="text/javascript" src="https://cdn.chec.io/v1/commerce.js"></script>
-  <script>
-    Chec = new Commerce('pk_test_123038fb76224b56002794cb19cf9ca207dd0605bf9da', true);
-  </script>
-  <script type="text/javascript" src="./assets/js/vendor.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="./assets/js/store.js"></script>
-  <link href="./assets/css/store.css" rel="stylesheet" type="text/css">
+    <title>Javascript eCommerce Boilerplate</title>
+    <script type="text/javascript" src="./assets/js/bundle.js"></script>
+    <link href="./assets/css/bundle.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/png" href="./assets/images/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="./assets/images/favicon-32x32.png" sizes="32x32">
 </head>
 <body>
+<div class="container">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="./index.html">Your Store</a>
 
-  <div class="container">
-    <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">
-        Your Store
-      </a>
+        <a href="/cart.html" class="btn btn-secondary">
+            <i class="fas fa-shopping-cart cart__icon" aria-hidden="true"></i>
+            <span class="badge cart-total">
+                <i class="fas fas-spinner cart__loading"></i>
+            </span>
+        </a>
+    </nav>
 
+    <div class="row" id="products">
     </div>
-    <ul class="nav navbar-nav navbar-right">
-        <li>      <a href="/cart.html" class="btn btn-secondary" type="button">
-                   <span class="glyphicon glyphicon-align-left glyphicon-shopping-cart" aria-hidden="true"></span>  <span class="badge cart-total"></span>
-              </a>
-          </li>
-      </ul>
-  </div>
-</nav>
-
-	   <div class="row" id="products">
-	   </div>
-  </div>
-
-  <script>
-  window.addEventListener("Commercejs.Cart.Ready", function(e){
-          Store.updateCartTotal();
-        }, false);
-  </script>
-
+</div>
 </body>
 </html>

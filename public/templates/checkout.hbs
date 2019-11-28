@@ -1,340 +1,294 @@
+<form class="form-horizontal" role="form" name="checkout_form">
+  <input type="hidden" name="checkout_token_id" value="{{id}}">
 
-
-    <form class="form-horizontal" role="form" name="checkout_form">
-<input type="hidden" name="checkout_token_id" value="{{id}}">
-
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-
-    <ul class="list-group">
-      {{#each live.line_items }}
-      <li class="list-group-item" data-line-item-id="{{id}}">
-
-        <div class="row">
-          <!--
-          <div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
-          </div>!-->
-          <div class="col-xs-6" style="text-align:left;">
-            <h4 class="product-name"><strong>{{ product_name }}</strong></h4><h4>
-              <small>
-                {{#each variants}}
-                  {{option_name}}{{#if @last}}{{else}},{{/if}}
-                {{/each}}
-              </small>
-            </h4>
-          </div>
-          <div class="col-xs-6">
-            <div class="col-xs-4">
-              <input type="text" class="quantity form-control input-sm" name="line_item[{{id}}][quantity]" value="{{quantity}}" onchange="Store.checkoutVerifyQuantity($('input[name=checkout_token_id]').val(), '{{id}}', $(this).val() ) ;">
-            </div>
-            <div class="col-xs-6 text-right">
-              <h6><strong class="line-total">{{ line_total.formatted_with_symbol }}</strong></h6>
-            </div>
-
-            <div class="col-xs-2">
-
-            </div>
-          </div>
-        </div>
-
-      </li>
-      {{/each}}
-    </ul>
-
-
-
+  <div class="row">
+    <div class="col-md-8">
+      <h1>Checkout</h1>
       {{#if collects.extrafields}}
       <fieldset>
-
-        <legend>Extrafields</legend>
-
-
+        <legend>Extra fields</legend>
         {{#each extrafields }}
-        <div class="form-group">
-          <label class="col-sm-2 control-label" for="textinput">{{name}}</label>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="extrafields{{id}}">{{name}}</label>
           <div class="col-sm-10">
-
-
-            <input type="text" placeholder="" name="extrafields[{{id}}]" class="form-control">
-
-
-
+            <input type="text" name="extrafields[{{id}}]" id="extrafields{{id}}" class="form-control">
           </div>
         </div>
-
         {{/each}}
-
       </fieldset>
       {{/if }}
 
-
-
       <fieldset>
-        <!-- Form Name -->
-        <legend>Customer Details</legend>
-
-
-{{#if collects.fullname}}
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-sm-2 control-label" for="textinput">First Name</label>
+        <legend>Customer details</legend>
+        {{#if collects.fullname}}
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="customerFirstName">First name</label>
           <div class="col-sm-4">
-            <input type="text" placeholder="" class="form-control" name="customer[firstname]">
-          </div>
-
-          <label class="col-sm-2 control-label" for="textinput">Last Name</label>
-          <div class="col-sm-4">
-            <input type="text" placeholder="" class="form-control" name="customer[lastname]">
+            <input type="text" class="form-control" id="customerFirstName" name="customer[firstname]">
           </div>
         </div>
-{{/if }}
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-sm-2 control-label" for="textinput">Email</label>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="customerLastName">Last name</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="customerLastName" name="customer[lastname]">
+          </div>
+        </div>
+        {{/if }}
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="customerEmail">Email</label>
           <div class="col-sm-10">
-            <input type="text" placeholder="" class="form-control" name="customer[email]">
+            <input type="text" class="form-control" id="customerEmail" name="customer[email]">
           </div>
         </div>
-
       </fieldset>
+
       {{#if collects.shipping_address}}
       <hr>
       <fieldset>
-        <!-- Form Name -->
-        <legend>Shipping Address</legend>
+        <legend>Shipping address</legend>
 
-
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-sm-2 control-label" for="textinput">Name</label>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="shippingName">Name</label>
           <div class="col-sm-10">
-            <input type="text" placeholder="name" class="form-control" name="shipping[name]">
+            <input type="text" placeholder="Name" class="form-control" id="shippingName" name="shipping[name]">
           </div>
         </div>
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-sm-2 control-label" for="textinput">Line 1</label>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="shippingLine1">Line 1</label>
           <div class="col-sm-10">
-            <input type="text" placeholder="Address Line 1" class="form-control" name="shipping[street]">
+            <input type="text" placeholder="Address line 1" class="form-control" id="shippingLine1" name="shipping[street]">
           </div>
         </div>
-
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-sm-2 control-label" for="textinput">Country</label>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="shipping-countries">Country</label>
           <div class="col-sm-10">
             <select class="form-control" name="shipping[country]" id="shipping-countries">
-
+              {{! populated by helper function commerce.services.localeListShippingCountries() }}
             </select>
-
           </div>
         </div>
-
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-sm-2 control-label" for="textinput">City</label>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="shippingCity">City</label>
           <div class="col-sm-10">
-            <input type="text" name="shipping[town_city]" placeholder="City" class="form-control">
+            <input type="text" id="shippingCity" name="shipping[town_city]" placeholder="City" class="form-control">
           </div>
         </div>
-
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-sm-2 control-label" for="textinput">State</label>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="shipping-states">State</label>
           <div class="col-sm-4">
             <select class="form-control" name="shipping[county_state]" id="shipping-states">
-
+              {{! populated by helper function commerce.services.localeListSubdivisions() }}
             </select>
           </div>
-
-          <label class="col-sm-2 control-label" for="textinput">Zip/Post Code</label>
+          <label class="col-sm-2 col-form-label" for="shippingPostCode">Zip/Post Code</label>
           <div class="col-sm-4">
-            <input type="text" name="shipping[postal_zip_code]" placeholder="Post Code" class="form-control" onblur="Store.checkoutVerifyTax($('input[name=checkout_token_id]').val())">
+            <input type="text" id="shippingPostCode" name="shipping[postal_zip_code]" placeholder="Post Code" class="form-control" onblur="Store.checkoutVerifyTax($('input[name=checkout_token_id]').val())">
           </div>
         </div>
-
-
         <script>
-        Chec.Services.localeListShippingCountries('{{id}}', function(resp){
+        function updateShippingStates(country) {
+          window.commerce.services.localeListShippingSubdivisions('{{id}}', country)
+            .then(function (subdivisionsResponse) {
+              const states = $('#shipping-states');
+              states.empty();
 
-          $('#shipping-countries').html(resp.html);
+              Object.entries(subdivisionsResponse.subdivisions).forEach(([key, value]) => {
+                const stateKey = key.substr(country.length + 1); // Removes "US-" prefix
+                states.append(`<option value="${stateKey}">${value}</option>`);
+              });
+            });
+        }
 
+        window.commerce.services.localeListShippingCountries('{{id}}')
+          .then(function (countriesResponse) {
+            $('#shipping-countries').html(countriesResponse.html);
+
+            updateShippingStates(Object.keys(countriesResponse.countries)[0]);
+          });
+
+        $('#shipping-countries').on('change', function() {
+          updateShippingStates($(this).find('option:selected').val());
         });
-
-        Chec.Services.localeListSubdivisions('US', function(resp){
-
-          $('#shipping-states').html(resp.html);
-
-        });
-
         </script>
-
-
-
       </fieldset>
       {{/if}}
 
-
-            {{#if has.physical_delivery}}
-            <hr>
-            <fieldset>
-
-              <div class="form-group">
-                <label class="col-sm-2 control-label" for="textinput">Shipping Options</label>
-                <div class="col-sm-10">
-                  <select class="form-control" name="fulfillment[shipping_method]" onchange="Store.checkoutVerifyShipping($('input[name=checkout_token_id]').val(), 'US', $(this).val())">
-                    <option selected disabled>Please select a shipping method</option>
-                    {{#each shipping_methods}}
-                      <option value="{{id}}">{{description}} - {{ price.formatted_with_symbol}}</option>
-                    {{/each}}
-                  </select>
-
-
-
-                </div>
-              </div>
-
-
-
-            </fieldset>
-            {{/if }}
+      {{#if has.physical_delivery}}
+      <hr>
+      <fieldset>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="shippingMethod">Shipping options</label>
+          <div class="col-sm-10">
+            <select class="form-control" id="shippingMethod" name="fulfillment[shipping_method]" onchange="Store.checkoutVerifyShipping($('input[name=checkout_token_id]').val(), 'US', $(this).val())">
+              <option selected disabled>Please select a shipping method</option>
+              {{#each shipping_methods}}
+                <option value="{{id}}">{{description}} - {{ price.formatted_with_symbol}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+      </fieldset>
+      {{/if }}
 
       {{#if collects.billing_address}}
       <hr>
       <fieldset>
-        <!-- Form Name -->
-        <legend>Billing Address</legend>
+        <legend>Billing address</legend>
 
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-sm-2 control-label" for="textinput">Line 1</label>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="billingName">Name</label>
           <div class="col-sm-10">
-            <input type="text" placeholder="Address Line 1" class="form-control">
+            <input type="text" placeholder="Name" class="form-control" id="billingName" name="billing[name]">
           </div>
         </div>
-
-
-                <!-- Text input-->
-                <div class="form-group">
-                  <label class="col-sm-2 control-label" for="textinput">Country</label>
-                  <div class="col-sm-10">
-                    <select class="form-control" id="billing-countries" name="">
-
-                    </select>
-                  </div>
-                </div>
-
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-sm-2 control-label" for="textinput">City</label>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="billingLine1">Line 1</label>
           <div class="col-sm-10">
-            <input type="text" placeholder="City" class="form-control">
+            <input type="text" placeholder="Address line 1" class="form-control" id="billingLine1" name="billing[street]">
           </div>
         </div>
-
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-sm-2 control-label" for="textinput">State</label>
-          <div class="col-sm-4">
-            <input type="text" placeholder="State" class="form-control">
-          </div>
-
-          <label class="col-sm-2 control-label" for="textinput">Postcode</label>
-          <div class="col-sm-4">
-            <input type="text" placeholder="Post Code" class="form-control">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="billing-countries">Country</label>
+          <div class="col-sm-10">
+            <select class="form-control" name="billing[country]" id="billing-countries">
+              {{! populated by helper function commerce.services.localeListCountries() }}
+            </select>
           </div>
         </div>
-
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="billingCity">City</label>
+          <div class="col-sm-10">
+            <input type="text" id="billingCity" name="billing[town_city]" placeholder="City" class="form-control">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="billing-states">State</label>
+          <div class="col-sm-4">
+            <select class="form-control" name="billing[county_state]" id="billing-states">
+              {{! populated by helper function commerce.services.localeListSubdivisions() }}
+            </select>
+          </div>
+          <label class="col-sm-2 col-form-label" for="billingPostCode">Zip/Post Code</label>
+          <div class="col-sm-4">
+            <input type="text" id="billingPostCode" name="billing[postal_zip_code]" placeholder="Post Code" class="form-control">
+          </div>
+        </div>
 
         <script>
-        Chec.Services.localeListCountries(function(resp){
+        function updateBillingStates(country) {
+          window.commerce.services.localeListSubdivisions(country)
+            .then(function (subdivisionsResponse) {
+              $('#billing-states').html(subdivisionsResponse.html);
+            });
+        }
 
-          $('#billing-countries').html(resp.html);
+        window.commerce.services.localeListCountries('{{id}}')
+          .then(function (countriesResponse) {
+            $('#billing-countries').html(countriesResponse.html);
+            $('#billing-countries').val('US'); // Default to the US
+            updateBillingStates('US');
+          });
 
+        $('#billing-countries').on('change', function() {
+          updateBillingStates($(this).find('option:selected').val());
         });
         </script>
-
       </fieldset>
       {{/if}}
 
       <hr>
+
       <fieldset>
-        <!-- Form Name -->
-        <legend>Payment Details</legend>
-
+        <legend>Payment details</legend>
         <input name="payment[gateway]" value="test_gateway" type="hidden">
-
-        <!-- Text input-->
-        <div class="form-group">
-          <label class="col-sm-2 control-label" for="textinput">Card Number</label>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="ccNumber">Card number</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" value="4242 4242 4242 4242" name="payment[card][number]">
+            <input type="text" class="form-control" value="4242 4242 4242 4242" id="ccNumber" name="payment[card][number]">
           </div>
         </div>
-                <!-- Text input-->
-                <div class="form-group">
-
-                  <label class="col-sm-2 control-label" for="textinput">Expiry Date</label>
-                  <div class="col-sm-4">
-                      <input type="text" class="form-control" name="payment[card][expires]" value="11 / 19">
-                  </div>
-                  <label class="col-sm-2 control-label" for="textinput">CVV</label>
-                  <div class="col-sm-4">
-                      <input type="text" class="form-control" name="payment[card][cvc]" value="123">
-                  </div>
-                </div>
-
-
-
+        <div class="form-group row">
+          <label class="col-sm-2 control-label" for="ccExpires">Expiry date</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="ccExpires" name="payment[card][expires]" value="11/22">
+          </div>
+          <label class="col-sm-2 control-label" for="ccCvc">CVV</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="ccCvc" name="payment[card][cvc]" value="123">
+          </div>
+        </div>
       </fieldset>
+    </div>
 
+    <div class="col-md-4">
+      <ul class="list-group">
+        {{#each live.line_items }}
+        <li class="list-group-item" data-line-item-id="{{id}}">
+          <p>
+            <strong>{{ product_name }}</strong> <small>
+            {{#each variants}}
+            {{option_name}}{{#if @last}}{{else}},{{/if}}
+            {{/each}}
+            </small>
+          </p>
+          <div class="row">
+            <div class="col-6">
+              <input type="text" class="quantity form-control input-sm" name="line_item[{{id}}][quantity]" value="{{quantity}}" onchange="Store.checkoutVerifyQuantity($('input[name=checkout_token_id]').val(), '{{id}}', $(this).val() ) ;">
+            </div>
+            <div class="col-6 text-right">
+              <strong class="line-total">{{ line_total.formatted_with_symbol }}</strong>
+            </div>
+          </p>
+        </li>
+        {{/each}}
+      </ul>
 
+      <p class="text-center my-4">
+        <a href="./cart.html" class="btn btn-outline-secondary btn-sm">
+          <i class="fas fa-angle-left" /> Manage cart
+        </a>
+      </p>
 
-    </form>
-
-    <ul class="list-group">
-      <li class="list-group-item">
-        <div class="row">
-          <div class="col-xs-6" style="text-align:left;">
-            <h4 class="product-name"><strong>Subtotal</strong></h4>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-6 text-left">Subtotal</div>
+            <div class="col-6 text-right">
+              <span class="subtotal-amount">{{live.subtotal.formatted_with_symbol}}</span>
+            </div>
           </div>
-          <div class="col-xs-6" style="text-align:right;">
-            <h4><strong class="subtotal-amount">{{live.subtotal.formatted_with_symbol}}</strong></h4>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-6 text-left">Shipping</div>
+            <div class="col-6 text-right">
+              <span class="shipping-amount">{{live.shipping.price.formatted_with_symbol}}</span>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-6" style="text-align:left;">
-            <h4 class="product-name"><strong>Shipping</strong></h4>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-6 text-left">Tax</div>
+            <div class="col-6 text-right">
+              <span class="tax-amount">{{live.tax.amount.formatted_with_symbol}}</span>
+            </div>
           </div>
-          <div class="col-xs-6" style="text-align:right;">
-            <h4 class="product-name"><strong class="shipping-amount">{{live.shipping.price.formatted_with_symbol}}</strong></h4>
+        </li>
+        <li class="list-group-item list-group-item-secondary">
+          <div class="row">
+            <div class="col-6 text-left">
+              <strong>Total</strong>
+            </div>
+            <div class="col-6 text-right">
+              <strong class="total-amount">{{live.total_with_tax.formatted_with_symbol}}</strong>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-6" style="text-align:left;">
-            <h4 class="product-name"><strong>Tax</strong></h4>
-          </div>
-          <div class="col-xs-6" style="text-align:right;">
-            <h4 class="product-name"><strong class="tax-amount">{{live.tax.amount.formatted_with_symbol}}</strong></h4>
-          </div>
-        </div>
-        <div class="row" style="background:#ddd;">
-          <div class="col-xs-6" style="text-align:left;">
-            <h4 class="product-name"><strong>Total</strong></h4>
-          </div>
-          <div class="col-xs-6" style="text-align:right;">
-            <h4 class="product-name"><strong class="total-amount">{{live.total_with_tax.formatted_with_symbol}}</strong></h4>
-          </div>
-        </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</form>
 
+<div class="error-container alert alert-danger invisible"></div>
 
-      </li>
-    </ul>
-
-
-    <button type="button" onclick="Store.checkoutNow($('input[name=checkout_token_id]').val());"> Checkout Now </button>
-
-
-
-  </div><!-- /.col-lg-12 -->
-</div><!-- /.row -->
+<button type="button" class="btn btn-success btn-lg btn-block" onclick="Store.checkoutNow($('input[name=checkout_token_id]').val());"> Checkout Now</button>

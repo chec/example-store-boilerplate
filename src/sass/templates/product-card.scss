@@ -1,25 +1,17 @@
-#products{
-
-  .product{
+#products {
+  .product {
     display: inline-block;
     vertical-align: top;
     text-align: left;
 
-    .image-wrap{
-
+    .image-wrap {
       width: 350px;
       height: 175px;
       overflow: hidden;
 
       img {
-
         width:100%;
-        
-
-
       }
-
     }
   }
-
 }

@@ -1,66 +1,61 @@
 <div class="row">
   <div class="col-sm-8" id="cart-wrap">
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <div class="panel-title">
-          <div class="row">
-            <div class="col-xs-6" style="text-align:left;">
-              <h5><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp; Shopping Cart</h5>
-            </div>
-            <div class="col-xs-6">
-              <a href="/" class="btn btn-primary btn-sm btn-block">
-                <span class="glyphicon glyphicon-share-alt"></span> Continue shopping
-              </a>
-            </div>
-          </div>
+    <div class="card card-info">
+      <div class="card-header">
+        <div class="d-flex align-items-center">
+          <h5 class="flex-grow-1 cart-title text-left mb-0">
+            <span class="fas fa-shopping-cart"></span> Shopping Cart
+          </h5>
+          <a href="/" class="btn btn-primary btn-sm">
+            <span class="fas fa-angle-left"></span> Continue shopping
+          </a>
         </div>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
 
         {{#each line_items}}
-
-        <div class="row">
+        <div class="row d-flex align-items-center">
           <!--
-          <div class="col-xs-2"><img class="img-responsive" src="http://placehold.it/100x70">
+          <div class="col-2"><img class="img-responsive" src="http://placehold.it/100x70">
           </div>!-->
-          <div class="col-xs-6" style="text-align:left;">
-            <h4 class="product-name"><strong>{{ name }}</strong></h4><h4>
+          <div class="col-6 text-left">
+            <h6 class="product-name mb-0">
+              <strong>{{ name }}</strong>
               <small>
                 {{#each variants}}
                   {{option_name}}{{#if @last}}{{else}},{{/if}}
                 {{/each}}
               </small>
-            </h4>
+            </h6>
           </div>
-          <div class="col-xs-6">
-            <div class="col-xs-4">
-              <input type="text" class="form-control input-sm" value="{{quantity}}" onchange="Store.updateQuantity('{{id}}', $(this).val());">
-            </div>
-            <div class="col-xs-6 text-right">
-              <h6><strong>{{ line_total.formatted_with_symbol }}</strong></h6>
-            </div>
+          <div class="col-6">
+            <div class="row d-flex align-items-center">
+              <div class="col-4">
+                <input type="text" class="form-control input-sm" value="{{quantity}}" onchange="Store.updateQuantity('{{id}}', $(this).val());">
+              </div>
+              <div class="col-6 text-right">
+                {{ line_total.formatted_with_symbol }}
+              </div>
 
-            <div class="col-xs-2">
-              <button type="button" class="btn btn-link btn-xs" onclick="Store.removeItem('{{id}}')">
-                <span class="glyphicon glyphicon-trash"> </span>
-              </button>
+              <div class="col-2">
+                <button type="button" class="btn btn-link text-danger btn-xs" onclick="Store.removeItem('{{id}}')">
+                  <span class="fas fa-trash"> </span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        <hr>
+        {{#unless @last}}<hr>{{/unless}}
         {{/each}}
 
-
       </div>
-      <div class="panel-footer">
-        <div class="row text-center">
-          <div class="col-xs-9">
-            <h4 class="text-right">Total <strong>{{subtotal.formatted_with_symbol}}</strong></h4>
+      <div class="card-footer">
+        <div class="row text-right d-flex align-items-center">
+          <div class="col-9">
+            Total: <strong>{{subtotal.formatted_with_symbol}}</strong>
           </div>
-          <div class="col-xs-3">
-            <button type="button" onclick="window.location = '/checkout.html'" class="btn btn-success btn-block">
-              Checkout
-            </button>
+          <div class="col-3">
+            <a href="./checkout.html" class="btn btn-success">Checkout</a>
           </div>
         </div>
       </div>

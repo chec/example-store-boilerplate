@@ -1,0 +1,9 @@
+// Use compiled Bootstrap source
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+@import "partials/colors";
+@import "partials/images";
+@import "template";
+@import "cart";
+@import "checkout";
+@import "templates/product-card";
