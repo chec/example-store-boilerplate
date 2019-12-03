@@ -231,9 +231,12 @@
             {{/each}}
             </small>
           </p>
+          {{#each variants}}
+            <input type="hidden" name="line_items[{{../id}}][variants][{{variant_id}}]" value="{{option_id}}" />
+          {{/each}}
           <div class="row">
             <div class="col-6">
-              <input type="text" class="quantity form-control input-sm" name="line_item[{{id}}][quantity]" value="{{quantity}}" onchange="Store.checkoutVerifyQuantity($('input[name=checkout_token_id]').val(), '{{id}}', $(this).val() ) ;">
+              <input type="text" class="quantity form-control input-sm" name="line_items[{{id}}][quantity]" value="{{quantity}}" onchange="Store.checkoutVerifyQuantity($('input[name=checkout_token_id]').val(), '{{id}}', $(this).val() ) ;">
             </div>
             <div class="col-6 text-right">
               <strong class="line-total">{{ line_total.formatted_with_symbol }}</strong>

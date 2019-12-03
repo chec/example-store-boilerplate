@@ -12,18 +12,25 @@ export default () => {
     commerce.products.list().then(products => {
       const template = getTemplate('product-card');
       const productsSelector = $('#products');
+      productsSelector.empty();
+
+      if (products.meta.pagination.total === 0) {
+        return productsSelector.append(
+          '<div class="col-12">No products. Try <code>yarn seed</code> on your command line to add some test examples!</div>'
+        );
+      }
 
       return $.each(products.data, (k, product) => {
         productsSelector.append(template(product));
-        if (k && ((k % 2) === 0)) {
+        if (k && (k + 1) % 3 === 0) {
           return productsSelector.append('<hr class="product-break">');
         }
       });
     });
   };
 
-  Store.addToCart = add => {
-    commerce.cart.add(add).then(resp => {
+  Store.addToCart = (...args) => {
+    commerce.cart.add(...args).then(resp => {
       $('.cart-total').html(resp.cart.subtotal.formatted_with_symbol);
       return alert('Item added to cart!');
     });
@@ -123,7 +130,8 @@ export default () => {
         return alert('Sent! Check console for result');
       })
       .catch(error => {
-        $('.error-container').removeClass('invisible').html(`Something went wrong: ${error.message}`);
+        const message = error.data ? error.data.error.message : error.message;
+        $('.error-container').removeClass('invisible').html(`Something went wrong: ${message}`);
       });
   };
 

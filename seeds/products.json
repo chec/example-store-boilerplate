@@ -1,0 +1,80 @@
+[
+  {
+    "product": {
+      "name": "Product with variants",
+      "price": "49.95",
+      "description": "A product with some variants"
+    },
+    "variant": [
+      {
+        "name": "Color",
+        "options": [
+          {
+            "description": "Red",
+            "price": "0.00"
+          },
+          {
+            "description": "Blue",
+            "price": "5.00"
+          },
+          {
+            "description": "Green",
+            "price": "10.00"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "product": {
+      "name": "Product requires billing address",
+      "price": "20.00",
+      "description": "This product requires the billing address to be collected"
+    },
+    "collect": {
+      "billing": true
+    }
+  },
+  {
+    "product": {
+      "name": "Product requires customer name",
+      "price": "5.00",
+      "description": "This product requires the customer's name to be collected"
+    },
+    "collect": {
+      "fullname": true
+    }
+  },
+  {
+    "product": {
+      "name": "Product with extra fields",
+      "price": "99.95",
+      "description": "This product has custom extra fields"
+    },
+    "extra_field": [
+      {
+        "name": "Custom message",
+        "required": false
+      },
+      {
+        "name": "Tell us a joke",
+        "required": true
+      }
+    ]
+  },
+  {
+    "product": {
+      "name": "Basic product",
+      "price": "10.00",
+      "description": "This product has nothing special about it"
+    }
+  },
+  {
+    "product": {
+      "name": "Product with only 3 left",
+      "price": "15.00",
+      "description": "This product only has 3 items left in inventory!",
+      "quantity": 3
+    }
+  }
+]

@@ -5,7 +5,8 @@
     "dev": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "npm run dev -- --watch",
     "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --open --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "prod": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "prod": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "seed": "chec-seed seeds"
   },
   "dependencies": {
     "@chec/commerce.js": "^2.0.0-beta5",
@@ -18,6 +19,7 @@
     "@babel/core": "^7.7.4",
     "@babel/polyfill": "^7.7.0",
     "@babel/preset-env": "^7.7.4",
+    "@chec/seeder": "^1.0.0-beta1",
     "@fortawesome/fontawesome-free": "^5.11.2",
     "cross-env": "^6.0.3",
     "laravel-mix": "^5.0.0",
