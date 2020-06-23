@@ -1,6 +1,8 @@
 # Commerce.js boilerplate
 
-This repository contains a bare-bones example store to see how Commerce.js works. The templates uses Bootstrap for
+This boilerplate is for creating a bare-bones example store to show how Commerce.js pulls product data from a Chec account to display product data. The boilerplate includes storefront, cart, checkout.
+
+Use the test data provided or add your Chec account's public key. The template uses Bootstrap for
 some basic styling.
 
 ![](https://github.com/chec/example-store-boilerplate/blob/master/public/assets/images/Screen%20Shot%202020-06-22%20at%205.09.45%20PM.png)
