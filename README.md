@@ -3,6 +3,8 @@
 This repository contains a bare-bones example store to see how Commerce.js works. The templates uses Bootstrap for
 some basic styling.
 
+[](https://github.com/chec/example-store-boilerplate/blob/master/public/assets/images/Screen%20Shot%202020-06-22%20at%205.09.45%20PM.png)
+
 ## Requirements
 
 You will need the following to run this store:
