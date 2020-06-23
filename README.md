@@ -2,8 +2,7 @@
 
 Use this boilerplate to generate a bare-bones example storefront + cart + checkout using Commerce.js. 
 
-Use the test data provided or add your Chec account's public API key. The template uses Bootstrap for
-some basic styling.
+Use the test data provided, or add your Chec account's public API key to pull product data.
 
 ![](https://github.com/chec/example-store-boilerplate/blob/master/public/assets/images/Screen%20Shot%202020-06-22%20at%205.09.45%20PM.png)
 
