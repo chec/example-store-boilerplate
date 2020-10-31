@@ -41,7 +41,7 @@ Here are the libraries and tools we use in this example:
 * Markup: Standard HTML, with dynamic templates using Handlebars
 * Build: Node.js with Yarn (or NPM) 
 
-Everything you see in this repository as an example of how you could use Commerce.js in your own project. You are
+Everything you see in this repository is an example of how you could use Commerce.js in your own project. You are
 of course free to modify the code in this repository as you please. Commerce.js can be implemented into any frontend
 framework. For more information, see [the Commerce.js documentation](https://commercejs.com/docs).
 
