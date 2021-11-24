@@ -53,3 +53,8 @@ If you find any problems with this example store, please feel free to raise an i
 ## License
 
 BSD-3-Clause - see [LICENSE.md](LICENSE.md).
+
+## ⚠️ Note
+
+### This repository is no longer maintained
+However, we will accept issue reports and contributions for this repository. See the [contribute to the commerce community](https://commercejs.com/docs/community/contribute) page for more information on how to contribute to our open source projects. For update-to-date APIs, please check the latest version of the [API documentation](https://commercejs.com/docs/api/).
